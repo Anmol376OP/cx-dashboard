@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Activity, LayoutDashboard, Ticket, Wifi } from "lucide-react"
+import { Activity, LayoutDashboard, Ticket } from "lucide-react"
 
 const Navigation = () => {
   const pathname = usePathname()
