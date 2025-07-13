@@ -134,6 +134,10 @@
   .text-sidebar-primary-foreground { color: hsl(var(--sidebar-primary-foreground)); }
   .text-sidebar-accent-foreground { color: hsl(var(--sidebar-accent-foreground)); }
 
+  .text-success { color: hsl(var(--success)); }
+  .text-warning { color: hsl(var(--warning)); }
+  .text-moderate { color: hsl(var(--moderate)); }
+  .text-critical { color: hsl(var(--critical)); }
   .text-success-foreground { color: hsl(var(--success-foreground)); }
   .text-warning-foreground { color: hsl(var(--warning-foreground)); }
   .text-moderate-foreground { color: hsl(var(--moderate-foreground)); }

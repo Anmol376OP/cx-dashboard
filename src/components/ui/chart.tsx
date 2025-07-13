@@ -3,7 +3,6 @@
 import React from "react"
 import {
   ResponsiveContainer,
-  TooltipProps,
   LegendProps,
 } from "recharts"
 import { cn } from "@/lib/utils"
@@ -66,7 +65,7 @@ ChartContainer.displayName = "ChartContainer"
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([_, item]) => item.color || item.theme
+    ([, item]) => item.color || item.theme
   )
 
   if (!colorConfig.length) return null
@@ -91,18 +90,31 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     />
   )
 }
+type ChartPayloadItem = {
+  color: string
+  name: string
+  value: number | string
+  dataKey: string
+  payload: Record<string, unknown>
+}
 
 type CustomTooltipProps = {
   active?: boolean
-  payload?: any[]
+  payload?: Array<{
+    name: string
+    value: number | string
+    dataKey?: string
+    [key: string]: unknown
+  }>
+
   label?: string
   className?: string
   formatter?: (
     value: number | string,
     name: string,
-    item: any,
+    item: { [key: string]: unknown },
     index: number,
-    all: any[]
+    all: Array<{ [key: string]: unknown }>
   ) => React.ReactNode
   nameKey?: string
 }
@@ -151,7 +163,7 @@ export const ChartLegendContent = React.forwardRef<
   LegendProps & {
     hideIcon?: boolean
     nameKey?: string
-    payload: any[]
+    payload: ChartPayloadItem[]
   }
 >(({ className, payload, verticalAlign = "bottom", hideIcon = false }, ref) => {
   const { config } = useChart()
