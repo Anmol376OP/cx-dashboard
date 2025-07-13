@@ -13,7 +13,7 @@ export interface Ticket {
   updatedAt: string;
 }
 
-export const mockTickets: Ticket[] = [
+const baseTickets: Ticket[] = [
   {
     id: "TCK-001",
     title: "Cannot connect to mobile network",
@@ -29,7 +29,7 @@ export const mockTickets: Ticket[] = [
     updatedAt: "2024-01-15T10:30:00Z"
   },
   {
-    id: "TCK-002", 
+    id: "TCK-002",
     title: "Billing discrepancy in last month's statement",
     customerName: "Michael Chen",
     customerMessage: "I noticed some charges on my bill that don't match my plan. There are extra data charges but I have unlimited data. Can someone help me understand this?",
@@ -99,6 +99,23 @@ export const mockTickets: Ticket[] = [
     updatedAt: "2024-01-15T09:30:00Z"
   }
 ];
+
+export const mockTickets: Ticket[] = Array.from({ length: 1000 }, (_, i) => {
+  const base = baseTickets[i % baseTickets.length];
+  const suffix = (i + 1).toString().padStart(3, "0");
+
+  return {
+    ...base,
+    id: `TCK-${suffix}`,
+    customerName: `${base.customerName.split(" ")[0]} #${i + 1}`,
+    title: `${base.title} [${i + 1}]`,
+    customerMessage: `${base.customerMessage} (replica ${i + 1})`,
+    createdAt: new Date(Date.now() - i * 10000000).toISOString(),
+    updatedAt: new Date(Date.now() - i * 5000000).toISOString(),
+    tags: base.tags.map((tag) => `${tag}-${i + 1}`),
+  };
+});
+
 
 export const sentimentData = [
   { date: "Jan 10", positive: 0.65, negative: 0.25, neutral: 0.10 },
