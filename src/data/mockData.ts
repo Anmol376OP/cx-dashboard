@@ -119,26 +119,68 @@ export const categoryData = [
 
 export const ticketVolumeData = {
   daily: [
+    { date: "Jan 1", tickets: 40 },
+    { date: "Jan 2", tickets: 42 },
+    { date: "Jan 3", tickets: 39 },
+    { date: "Jan 4", tickets: 55 },
+    { date: "Jan 5", tickets: 48 },
+    { date: "Jan 6", tickets: 53 },
+    { date: "Jan 7", tickets: 60 },
+    { date: "Jan 8", tickets: 51 },
+    { date: "Jan 9", tickets: 47 },
     { date: "Jan 10", tickets: 45 },
     { date: "Jan 11", tickets: 52 },
     { date: "Jan 12", tickets: 38 },
     { date: "Jan 13", tickets: 61 },
     { date: "Jan 14", tickets: 49 },
-    { date: "Jan 15", tickets: 67 }
+    { date: "Jan 15", tickets: 67 },
+    { date: "Jan 16", tickets: 54 },
+    { date: "Jan 17", tickets: 58 },
+    { date: "Jan 18", tickets: 62 },
+    { date: "Jan 19", tickets: 59 },
+    { date: "Jan 20", tickets: 63 }
   ],
   weekly: [
     { date: "Week 1", tickets: 245 },
     { date: "Week 2", tickets: 289 },
     { date: "Week 3", tickets: 312 },
-    { date: "Week 4", tickets: 267 }
+    { date: "Week 4", tickets: 267 },
+    { date: "Week 5", tickets: 298 },
+    { date: "Week 6", tickets: 320 },
+    { date: "Week 7", tickets: 305 },
+    { date: "Week 8", tickets: 310 },
+    { date: "Week 9", tickets: 299 },
+    { date: "Week 10", tickets: 315 },
+    { date: "Week 11", tickets: 333 },
+    { date: "Week 12", tickets: 342 },
+    { date: "Week 13", tickets: 322 },
+    { date: "Week 14", tickets: 336 },
+    { date: "Week 15", tickets: 351 },
+    { date: "Week 16", tickets: 327 },
+    { date: "Week 17", tickets: 359 },
+    { date: "Week 18", tickets: 365 },
+    { date: "Week 19", tickets: 342 },
+    { date: "Week 20", tickets: 370 }
   ],
   monthly: [
+    { date: "Jan", tickets: 967 },
+    { date: "Feb", tickets: 1103 },
+    { date: "Mar", tickets: 1245 },
+    { date: "Apr", tickets: 1201 },
+    { date: "May", tickets: 1293 },
+    { date: "Jun", tickets: 1340 },
+    { date: "Jul", tickets: 1285 },
+    { date: "Aug", tickets: 1399 },
+    { date: "Sep", tickets: 1254 },
     { date: "Oct", tickets: 1145 },
     { date: "Nov", tickets: 1289 },
     { date: "Dec", tickets: 1312 },
-    { date: "Jan", tickets: 967 }
+    { date: "Jan (2)", tickets: 1023 },
+    { date: "Feb (2)", tickets: 1085 },
+    { date: "Mar (2)", tickets: 1150 }
   ]
 };
+
 
 export const aiInsights = {
   overallSentiment: "Positive",
