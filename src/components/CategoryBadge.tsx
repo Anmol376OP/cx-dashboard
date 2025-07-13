@@ -9,7 +9,7 @@ const CategoryBadge = ({ category, className }: CategoryBadgeProps) => {
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-accent-foreground border border-border",
+        "inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-black border border-border",
         className
       )}
     >

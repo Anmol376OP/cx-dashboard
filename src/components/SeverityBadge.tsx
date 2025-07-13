@@ -21,21 +21,6 @@ const SeverityBadge = ({ severity, className }: SeverityBadgeProps) => {
     }
   }
 
-  const getIcon = (severity: string) => {
-    switch (severity) {
-      case "Critical":
-        return "🔴"
-      case "Moderate":
-        return "🟧"
-      case "Needs Attention":
-        return "🟨"
-      case "Fixed":
-        return "🟢"
-      default:
-        return "⚪"
-    }
-  }
-
   return (
     <span
       className={cn(
@@ -44,7 +29,6 @@ const SeverityBadge = ({ severity, className }: SeverityBadgeProps) => {
         className
       )}
     >
-      <span>{getIcon(severity)}</span>
       {severity}
     </span>
   )

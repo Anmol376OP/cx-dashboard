@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Activity, Ticket, Wifi } from "lucide-react"
+import { Activity, LayoutDashboard, Ticket, Wifi } from "lucide-react"
 
 const Navigation = () => {
   const pathname = usePathname()
@@ -17,9 +17,9 @@ const Navigation = () => {
           <div className="flex items-center">
             <div className="flex items-center space-x-2">
               <div className="p-2 bg-gradient-primary rounded-lg">
-                <Wifi className="h-6 w-6 text-primary-foreground" />
+                <LayoutDashboard className="h-6 w-6 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">TelecomCX</span>
+              <span className="text-xl font-bold text-foreground">CX Dashboard</span>
             </div>
           </div>
           

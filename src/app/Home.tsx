@@ -97,18 +97,18 @@ const Home = () => {
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={sentimentData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis 
-                    dataKey="date" 
+                  <XAxis
+                    dataKey="date"
                     stroke="hsl(var(--muted-foreground))"
                     fontSize={12}
                   />
-                  <YAxis 
+                  <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     fontSize={12}
                     domain={[0, 1]}
                     tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
                   />
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
                       border: "1px solid hsl(var(--border))",
@@ -152,25 +152,82 @@ const Home = () => {
               <CardDescription>Breakdown of tickets by category</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
                   <Pie
                     data={categoryData}
                     cx="50%"
                     cy="50%"
-                    outerRadius={100}
+                    labelLine={false}
+                    outerRadius={120}
+                    innerRadius={40}
                     dataKey="count"
-                    label={({ category, count }) => `${category}: ${count}`}
+                    stroke="hsl(var(--background))"
+                    strokeWidth={2}
+                    label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+                      const RADIAN = Math.PI / 180;
+                      const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
+                      const safeMidAngle = typeof midAngle === "number" ? midAngle : 0;
+                      const safeIndex = typeof index === "number" ? index : 0;
+                      const x = cx + radius * Math.cos(-safeMidAngle * RADIAN);
+                      const y = cy + radius * Math.sin(-safeMidAngle * RADIAN);
+
+                      const category = categoryData[safeIndex]?.category ?? "";
+                      const percentText = `${((percent ?? 0) * 100).toFixed(0)}%`;
+                      const labelText = `${category} ${percentText}`;
+
+                      return (
+                        <text
+                          x={x}
+                          y={y}
+                          fill={(() => {
+                            const colors = [
+                              "hsl(var(--chart-1))",
+                              "hsl(var(--chart-2))",
+                              "hsl(var(--chart-3))",
+                              "hsl(var(--chart-4))",
+                              "hsl(var(--chart-5))",
+                              "hsl(var(--primary))"
+                            ];
+                            return colors[(typeof index === "number" ? index : 0) % colors.length];
+                          })()}
+
+                          textAnchor={x > cx ? "start" : "end"}
+                          dominantBaseline="central"
+                          fontSize="12"
+                          className=""
+                        >
+                          {labelText}
+                        </text>
+                      );
+                    }}
                   >
-                    {categoryData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
+                    {categoryData.map((entry, index) => {
+                      const colors = [
+                        "hsl(var(--chart-1))",
+                        "hsl(var(--chart-2))",
+                        "hsl(var(--chart-3))",
+                        "hsl(var(--chart-4))",
+                        "hsl(var(--chart-5))",
+                        "hsl(var(--primary))"
+                      ];
+                      return <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />;
+                    })}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)"
+                    }}
+                    formatter={(value: number, name: string) => [value, name]}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
+
         </div>
 
         {/* Ticket Volume Chart */}
@@ -210,25 +267,25 @@ const Home = () => {
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={ticketVolumeData[timePeriod]}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis 
-                  dataKey="date" 
+                <XAxis
+                  dataKey="date"
                   stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                 />
-                <YAxis 
+                <YAxis
                   stroke="hsl(var(--muted-foreground))"
                   fontSize={12}
                 />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: "6px"
                   }}
                 />
-                <Bar 
-                  dataKey="tickets" 
-                  fill="hsl(var(--primary))" 
+                <Bar
+                  dataKey="tickets"
+                  fill="hsl(var(--primary))"
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>
@@ -257,13 +314,13 @@ const Home = () => {
                 <p className="text-sm text-primary-foreground/90 mb-4">
                   Customer sentiment score: <span className="font-bold">{aiInsights.sentimentScore}%</span>
                 </p>
-                
+
                 <h4 className="font-semibold mb-2">Key Trends</h4>
                 <p className="text-sm text-primary-foreground/90">
                   {aiInsights.trends}
                 </p>
               </div>
-              
+
               <div>
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
                   <AlertCircle className="h-4 w-4" />
@@ -277,7 +334,7 @@ const Home = () => {
                     </li>
                   ))}
                 </ul>
-                
+
                 <h4 className="font-semibold mb-2 flex items-center gap-2">
                   <Lightbulb className="h-4 w-4" />
                   Recommendations
